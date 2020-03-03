@@ -2,7 +2,7 @@ grammar Hello;
 
 main: r+;
 r: greetings | bye;
-greetings: 'Hello' ID+;
+greetings: 'Hello' ID;
 bye: 'Bye' ID+;
 
 ID: [a-zA-Z]+;
