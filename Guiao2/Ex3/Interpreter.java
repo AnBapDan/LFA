@@ -1,26 +1,46 @@
-public class Interpreter extends CalculatorBaseVisitor<String> {
+public class Interpreter extends CalculatorBaseVisitor<Integer> {
 
-   @Override public String visitProgram(CalculatorParser.ProgramContext ctx) {
+   @Override public Integer visitProgram(CalculatorParser.ProgramContext ctx) {
       return visitChildren(ctx);
    }
 
-   @Override public String visitStat(CalculatorParser.StatContext ctx) {
-      return visitChildren(ctx);
+   @Override public Integer visitStat(CalculatorParser.StatContext ctx) {
+     if(ctx.expr()!=null){
+       int x =visit(ctx.expr());
+       System.out.println("Resultado: "+x);
+     }
+      return 0;
    }
 
-   @Override public String visitExprAddSub(CalculatorParser.ExprAddSubContext ctx) {
-      return visitChildren(ctx);
+   @Override public Integer visitExprAddSub(CalculatorParser.ExprAddSubContext ctx) {
+     int v1 = visit(ctx.expr(0));
+     int v2 = visit(ctx.expr(1));
+     int result =0;
+     switch(ctx.op.getText()){
+       case "+": result = v1 + v2; break;
+       case "-": result = v1 - v2; break;
+     }
+     return result;
    }
 
-   @Override public String visitExprParent(CalculatorParser.ExprParentContext ctx) {
-      return visitChildren(ctx);
+   @Override public Integer visitExprParent(CalculatorParser.ExprParentContext ctx) {
+
+      return visit(ctx.expr());
    }
 
-   @Override public String visitExprInteger(CalculatorParser.ExprIntegerContext ctx) {
-      return visitChildren(ctx);
+   @Override public Integer visitExprInteger(CalculatorParser.ExprIntegerContext ctx) {
+      return Integer.parseInt(ctx.Integer().getText());
    }
 
-   @Override public String visitExprMultDivMod(CalculatorParser.ExprMultDivModContext ctx) {
-      return visitChildren(ctx);
+   @Override public Integer visitExprMultDivMod(CalculatorParser.ExprMultDivModContext ctx) {
+      int v1 = visit(ctx.expr(0));
+      int v2 = visit(ctx.expr(1));
+      int result =0;
+      switch(ctx.op.getText()){
+        case "*": result = v1 * v2; break;
+        case "/": result = Math.round(v1/v2); break;
+        case "%": result = Math.round(v1%v2); break;
+      }
+      return result;
    }
 }
