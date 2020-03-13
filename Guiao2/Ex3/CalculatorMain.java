@@ -13,7 +13,7 @@ public class CalculatorMain {
       // replace error listener:
       //parser.removeErrorListeners(); // remove ConsoleErrorListener
       //parser.addErrorListener(new ErrorHandlingListener());
-      Interpreter visitor0 = new Interpreter();
+      InterpreterF visitor0 = new InterpreterF();
       while(lineText != null) {
          // create a CharStream that reads from standard input:
          CharStream input = CharStreams.fromString(lineText + "\n");

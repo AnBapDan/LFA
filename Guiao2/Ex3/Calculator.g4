@@ -9,7 +9,8 @@ stat:
   ;
 
 expr:
-      expr op=('*'|'/'|'%') expr      #ExprMultDivMod
+      op=('+'|'-') expr               #ExprIntegerSignal
+    | expr op=('*'|'/'|'%') expr      #ExprMultDivMod
     | expr op=('+'|'-') expr          #ExprAddSub
     | Integer                         #ExprInteger
     | '(' expr ')'                    #ExprParent
