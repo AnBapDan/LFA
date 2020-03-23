@@ -1,10 +1,7 @@
 import java.util.HashMap;
-import java.util.Stack;
 
 public class Interpreter extends CalculatorBaseVisitor<Integer> {
    HashMap<String, Integer> vars = new HashMap<>();
-
-   Stack<String> express = new Stack<>();
 
    @Override public Integer visitProgram(CalculatorParser.ProgramContext ctx) {
       visitChildren(ctx);
