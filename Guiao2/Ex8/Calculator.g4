@@ -5,9 +5,9 @@ program:
     ;
 
 stat:
-      expr? NEWLINE                    #Expression
-  |   print? NEWLINE                   #Println
-  |   assignment? NEWLINE              #Variable
+      expr? F? NEWLINE                    #Expression
+  |   print? F? NEWLINE                   #Println
+  |   assignment? F? NEWLINE              #Variable
   ;
 
 print: 'print' expr;
@@ -25,7 +25,8 @@ expr:
     ;
 
 Integer: [0-9]+;
-NEWLINE: '\r'? '\n';
+F: ';';
+NEWLINE : '\r'? '\n';
 WS: [ \t]+ -> skip;
 COMMENT: '//' .*? '\n' -> skip;
 ID: [a-zA-Z_]+;
